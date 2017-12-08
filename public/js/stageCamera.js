@@ -60,6 +60,8 @@ class Camera
 
 	viewerTransition()
 	{
+		trace("viewerTransition();");
+
 		this.viewer.addEventListener("transitionend", this.viewerTransitionEvent, false);
 
 		this.viewer.setAttribute("style", "transform: translate(" + this.viewer.x + "px, " + this.viewer.y + "px);");
@@ -113,38 +115,6 @@ function pageLoad_init()
 	project_setup();
 }
 
-function resize_init(run)
-{
-	if(run)
-	{
-		window.addEventListener("resize", resize_throttler, false);
-	}
-
-	else
-	{
-		window.removeEventListener("resize", resize_throttler, false);
-	}
-}
-
-function resize_throttler()
-{
-	if(!resizeTimeout)
-	{
-		resizeTimeout = setTimeout(resize_call, 66);
-	}
-}
-
-function resize_call()
-{
-	resizeTimeout = null;
-	resize_apply();
-}
-
-function resize_apply()
-{
-	trace("RESIZE");
-}
-
 function project_setup()
 {
 	displayList = {};
@@ -158,7 +128,7 @@ function project_setup()
 	camera_init();
 
 	// LAST
-	resize_init();
+	resize_init(true);
 }
 
 function section_init()
@@ -197,6 +167,41 @@ function camera_test1()
 function camera_newFocus()
 {
 	CAM.viewerUpdateValues();
+}
+
+function resize_init(run)
+{
+	if(run)
+	{
+		window.addEventListener("resize", resize_throttler, false);
+	}
+
+	else
+	{
+		window.removeEventListener("resize", resize_throttler, false);
+	}
+}
+
+function resize_throttler()
+{
+	if(!resizeTimeout)
+	{
+		resizeTimeout = setTimeout(resize_call, 66);
+	}
+}
+
+function resize_call()
+{
+	resizeTimeout = null;
+	resize_apply();
+}
+
+function resize_apply()
+{
+	trace("RESIZE");
+
+	CAM.updateResizeCamera();
+	CAM.viewerFind(sectionsARR[0]);
 }
 
 
