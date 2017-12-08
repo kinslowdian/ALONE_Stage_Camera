@@ -38,6 +38,30 @@ html, body
 	transform: translate(-50%, -50%);
 
 	border: 20px solid #fff;
+
+	overflow: hidden;
+}
+
+.viewer
+{
+	width: 2000px;
+	height: 1333px;
+
+	position: absolute;
+}
+
+.bg
+{
+	width: inherit;
+	height: inherit;
+
+	position: absolute;
+	left: 0; top: 0;
+
+	background-image: url(../img/bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100%;
 }
 
 
