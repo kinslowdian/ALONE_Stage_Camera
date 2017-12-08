@@ -37,8 +37,6 @@ html, body
 
 	transform: translate(-50%, -50%);
 
-	border: 20px solid #fff;
-
 	overflow: hidden;
 }
 
@@ -71,6 +69,17 @@ html, body
 	position: absolute;
 
 	background: rgba(255, 0, 51, 0.5);
+}
+
+.edge
+{
+	width: 100%;
+	height: 100%;
+
+	position: absolute;
+
+	outline: 20px solid #fff;
+	outline-offset: -20px;
 }
 
 
