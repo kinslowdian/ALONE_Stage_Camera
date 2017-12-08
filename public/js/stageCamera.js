@@ -127,6 +127,8 @@ function project_setup()
 
 	// LAST
 	resize_init(true);
+
+	dev_btns();
 }
 
 function section_init()

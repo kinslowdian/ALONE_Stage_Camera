@@ -6,6 +6,34 @@ html, body
 	height: 100%;
 }
 
+.dev
+{
+	width: inherit;
+	position: absolute;
+}
+
+.dev ul
+{
+	width: inherit;
+
+	position: relative;
+
+	padding: 20px;
+}
+
+.dev li
+{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	position: relative;
+	display: inline-block;
+	background: pink;
+	border-radius: 50%;
+	cursor: pointer;
+	user-select: none;
+}
+
 .basic-wrapper
 {
 	width: 100%;
