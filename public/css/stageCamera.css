@@ -85,15 +85,40 @@ html, body
 
 .ui ul
 {
-	width: calc(100% - 40px);
-	height: calc(100% - 40px);
+	/* 	OFF SET BORDER TO WIDTH AND HEIGHT */
+	width: calc(100% - 60px);
+	height: calc(100% - 60px);
 	
 	position: absolute;
 	left: 50%; top: 50%;
 	
 	transform: translate(-50%, -50%);
 	
-	background: blue;
+/* 	background: blue; */
+}
+
+.btn-u
+{
+	left: 50%; top:0;
+	transform: translate(-50%, 0);	
+}
+
+.btn-d
+{
+	left: 50%; bottom: 0;
+	transform: translate(-50%, 0);
+}
+
+.btn-l
+{
+	left: 0; top: 50%;
+	transform: translate(0, -50%);
+}
+
+.btn-r
+{
+	right: 0; top: 50%;
+	transform: translate(0, -50%);
 }
 
 .ui li
@@ -105,6 +130,26 @@ html, body
 	position: absolute;
 	
 	background: #000;
+	
+	user-select: none;
+	
+	cursor: pointer;
+	
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.ui li div
+{
+	width: 30%;
+	height: 30%;
+	border-radius: 50%;
+	
+	position: absolute;
+	
+	background: #fff;
+	
+	left: 50%; top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .viewer
