@@ -17,15 +17,13 @@ html, body
 	width: inherit;
 
 	position: relative;
-
-	padding: 20px;
 }
 
 .dev li
 {
 	width: 40px;
 	height: 40px;
-	margin-right: 10px;
+	margin: 10px 0 0 10px;
 	position: relative;
 	display: inline-block;
 	background: pink;
@@ -54,6 +52,11 @@ html, body
 	position: relative;
 }
 
+.tween
+{
+	backface-visibility: none;
+}
+
 .camera
 {
 	width: 50%;
@@ -66,6 +69,8 @@ html, body
 	transform: translate(-50%, -50%);
 
 	overflow: hidden;
+
+	background: #000;
 }
 
 .viewer

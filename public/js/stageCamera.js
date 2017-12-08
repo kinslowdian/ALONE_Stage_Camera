@@ -169,7 +169,7 @@ function camera_test1()
 {
 	// CAM.viewerShift(-500, -500);
 
-	CAM.viewerFind(sectionsARR[0]);
+	// CAM.viewerFind(sectionsARR[0]);
 }
 
 function camera_newFocus()

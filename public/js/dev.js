@@ -21,4 +21,6 @@ function dev_event(event)
 	event.preventDefault();
 
 	trace(event.target.dataset.num);
+
+	CAM.viewerFind(sectionsARR[event.target.dataset.num]);
 }
