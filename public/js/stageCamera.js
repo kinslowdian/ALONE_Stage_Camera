@@ -27,6 +27,18 @@ class Camera
 		this.viewer.y = 0;
 	}
 
+	viewerFind(target)
+	{
+		var vf = {};
+
+		vf.cx = -target.x;
+		vf.cy = -target.y;
+
+		trace(vf);
+
+		this.viewerShift(vf.cx, vf.cy);
+	}
+
 	viewerShift(x, y)
 	{
 		this.viewer.x = x;
@@ -65,9 +77,28 @@ class Camera
 	}
 }
 
+class Section
+{
+	constructor(main, w, h, x, y)
+	{
+		this.main = main;
+		this.w = w;
+		this.h = h;
+		this.x = x;
+		this.y = y;	
+	}
+
+	placement()
+	{
+		this.main.setAttribute("style", "width: " + this.w + "px; height: " + this.h + "px; transform: translate(" + this.x + "px, " + this.y + "px);");
+	}
+}
+
 
 var CAM; 
 var displayList;
+
+var sectionsARR;
 
 function pageLoad_init()
 {
@@ -83,10 +114,25 @@ function project_setup()
 	displayList.camera = document.querySelector(".camera");
 	displayList.viewer = document.querySelector(".viewer");
 
-	trace(displayList.viewer.style);
+	displayList.section0 = document.querySelector(".section0");
 
+	section_init();
 	camera_init();
 }
+
+function section_init()
+{
+	sectionsARR = new Array();
+
+	trace(displayList.section0);
+
+	var s0 = new Section(displayList.section0, 320, 568, 1500, 400);
+
+	s0.placement();
+
+	sectionsARR.push(s0);
+}
+
 
 function camera_init()
 {
@@ -102,7 +148,9 @@ function camera_init()
 
 function camera_test1()
 {
-	CAM.viewerShift(-500, -500);
+	// CAM.viewerShift(-500, -500);
+
+	CAM.viewerFind(sectionsARR[0]);
 }
 
 function camera_newFocus()

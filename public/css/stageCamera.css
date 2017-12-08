@@ -66,6 +66,13 @@ html, body
 	background-size: 100%;
 }
 
+.section
+{
+	position: absolute;
+
+	background: rgba(255, 0, 51, 0.5);
+}
+
 
 
 
