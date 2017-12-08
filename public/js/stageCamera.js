@@ -122,8 +122,6 @@ function project_setup()
 	displayList.camera = document.querySelector(".camera");
 	displayList.viewer = document.querySelector(".viewer");
 
-	displayList.section0 = document.querySelector(".section0");
-
 	section_init();
 	camera_init();
 
@@ -135,13 +133,21 @@ function section_init()
 {
 	sectionsARR = new Array();
 
-	trace(displayList.section0);
+	displayList.section0 = document.querySelector(".section0");
+	displayList.section1 = document.querySelector(".section1");
+	displayList.section2 = document.querySelector(".section2");
 
 	var s0 = new Section(displayList.section0, 320, 568, 1500, 400);
+	var s1 = new Section(displayList.section1, 180, 180, 200, 1000);
+	var s2 = new Section(displayList.section2, 200, 200, 400, 10);
 
 	s0.placement();
+	s1.placement();
+	s2.placement();
 
 	sectionsARR.push(s0);
+	sectionsARR.push(s1);
+	sectionsARR.push(s2);
 }
 
 
