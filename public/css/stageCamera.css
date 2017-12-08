@@ -48,6 +48,8 @@ html, body
 	height: 1333px;
 
 	position: absolute;
+
+	transition: 800ms ease-in-out;
 }
 
 .bg
