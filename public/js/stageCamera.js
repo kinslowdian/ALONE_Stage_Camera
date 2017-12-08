@@ -99,7 +99,7 @@ class Section
 
 var CAM; 
 var displayList;
-
+var resizeTimeout;
 var sectionsARR;
 
 function pageLoad_init()
@@ -107,6 +107,38 @@ function pageLoad_init()
 	trace("pageLoad_init();");
 
 	project_setup();
+}
+
+function resize_init(run)
+{
+	if(run)
+	{
+		window.addEventListener("resize", resize_throttler, false);
+	}
+
+	else
+	{
+		window.removeEventListener("resize", resize_throttler, false);
+	}
+}
+
+function resize_throttler()
+{
+	if(!resizeTimeout)
+	{
+		resizeTimeout = setTimeout(resize_call, 66);
+	}
+}
+
+function resize_call()
+{
+	resizeTimeout = null;
+	resize_apply();
+}
+
+function resize_apply()
+{
+	trace("RESIZE");
 }
 
 function project_setup()
@@ -120,6 +152,9 @@ function project_setup()
 
 	section_init();
 	camera_init();
+
+	// LAST
+	resize_init();
 }
 
 function section_init()
