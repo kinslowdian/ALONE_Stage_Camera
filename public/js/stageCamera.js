@@ -128,6 +128,8 @@ function project_setup()
 	// LAST
 	resize_init(true);
 
+	ui_init();
+	
 	dev_btns();
 }
 
@@ -176,6 +178,43 @@ function camera_newFocus()
 {
 	CAM.viewerUpdateValues();
 }
+
+function ui_init()
+{
+	displayList.btnU = document.querySelector(".ui .btn-u");
+	displayList.btnD = document.querySelector(".ui .btn-d");
+	displayList.btnL = document.querySelector(".ui .btn-l");
+	displayList.btnR = document.querySelector(".ui .btn-r");
+	
+	ui_run(true);
+}
+
+function ui_run(run)
+{
+	if(run)
+	{
+		displayList.btnU.addEventListener("click", ui_event, false);
+		displayList.btnD.addEventListener("click", ui_event, false);
+		displayList.btnL.addEventListener("click", ui_event, false);
+		displayList.btnR.addEventListener("click", ui_event, false);
+	}
+	
+	else
+	{
+		displayList.btnU.removeEventListener("click", ui_event, false);
+		displayList.btnD.removeEventListener("click", ui_event, false);
+		displayList.btnL.removeEventListener("click", ui_event, false);
+		displayList.btnR.removeEventListener("click", ui_event, false);		
+	}
+}
+
+function ui_event(event)
+{
+	trace(event.target.dataset.direction);
+}
+
+
+
 
 function resize_init(run)
 {
