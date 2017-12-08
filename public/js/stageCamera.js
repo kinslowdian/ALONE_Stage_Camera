@@ -31,14 +31,18 @@ class Camera
 	{
 		var vf = {};
 
-		vf.cx = -((target.x));
-		vf.cy = -((target.y));
-		vf.cx_f = vf.cx + ((this.w * 0.5) - (target.w * 0.5));
-		vf.cy_f = vf.cy + ((this.h * 0.5) - (target.h * 0.5));
+		// vf.cx = -((target.x));
+		// vf.cy = -((target.y));
+		// vf.cx_f = vf.cx + ((this.w * 0.5) - (target.w * 0.5));
+		// vf.cy_f = vf.cy + ((this.h * 0.5) - (target.h * 0.5));
+
+		vf.cx = -(target.x) + ((this.w * 0.5) - (target.w * 0.5));
+		vf.cy = -(target.y) + ((this.h * 0.5) - (target.h * 0.5));
 
 		trace(vf);
 
-		this.viewerShift(vf.cx_f, vf.cy_f);
+		// this.viewerShift(vf.cx_f, vf.cy_f);
+		this.viewerShift(vf.cx, vf.cy);
 	}
 
 	viewerShift(x, y)
