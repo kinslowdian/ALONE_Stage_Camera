@@ -73,6 +73,40 @@ html, body
 	background: #000;
 }
 
+.ui
+{
+	width: 100%;
+	height: 100%;
+	
+	position: absolute;
+	
+	left: 0; top: 0;
+}
+
+.ui ul
+{
+	width: calc(100% - 40px);
+	height: calc(100% - 40px);
+	
+	position: absolute;
+	left: 50%; top: 50%;
+	
+	transform: translate(-50%, -50%);
+	
+	background: blue;
+}
+
+.ui li
+{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	
+	position: absolute;
+	
+	background: #000;
+}
+
 .viewer
 {
 	width: 2000px;
