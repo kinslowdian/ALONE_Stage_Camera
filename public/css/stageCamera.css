@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+*
+{
+	user-select: none;
+}
+
 html, body
 {
 	width: 100%;
@@ -46,6 +51,8 @@ html, body
 	transform: translate(-50%, -50%);
 	
 	color: #000;
+	
+	pointer-events: none;
 }
 
 .basic-wrapper
@@ -137,6 +144,11 @@ html, body
 	transform: translate(0, -50%);
 }
 
+.btn-default
+{
+	opacity: 0;
+}
+
 .ui li
 {
 	width: 40px;
@@ -145,13 +157,15 @@ html, body
 	
 	position: absolute;
 	
-	background: #000;
+	background: yellow;
 	
 	user-select: none;
 	
 	cursor: pointer;
 	
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+/* 	box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); */
+
+	transition: opacity 200ms ease-in-out;
 }
 
 .ui li div
@@ -162,7 +176,7 @@ html, body
 	
 	position: absolute;
 	
-	background: #fff;
+	background: #333;
 	
 	left: 50%; top: 50%;
 	transform: translate(-50%, -50%);

@@ -110,6 +110,8 @@ var resizeTimeout;
 var sectionsARR;
 var sectionFocus;
 
+var directions;
+
 function pageLoad_init()
 {
 	trace("pageLoad_init();");
@@ -204,7 +206,21 @@ function ui_init()
 	displayList.btnL = document.querySelector(".ui .btn-l");
 	displayList.btnR = document.querySelector(".ui .btn-r");
 	
-	ui_run(true);
+	directions = new Array();
+	
+	directions.push(displayList.btnU);
+	directions.push(displayList.btnD);
+	directions.push(displayList.btnL);
+	directions.push(displayList.btnR);
+	
+	for(var i in directions)
+	{
+		directions[i].hasEvent = false;
+	}
+	
+	// ui_run(true);
+	
+	ui_reset();
 }
 
 function ui_run(run)
@@ -224,6 +240,20 @@ function ui_run(run)
 		displayList.btnL.removeEventListener("click", ui_event, false);
 		displayList.btnR.removeEventListener("click", ui_event, false);		
 	}
+}
+
+function ui_reset()
+{
+	for(var i in directions)
+	{
+		directions[i].allow = false;
+		directions[i].classList.add("btn-default");
+		
+		if(directions[i].hasEvent)
+		{
+			directions[i].removeEventListener("click", ui_event, false);
+		}
+	}	
 }
 
 function ui_event(event)
