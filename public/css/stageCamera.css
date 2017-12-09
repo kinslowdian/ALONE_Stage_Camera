@@ -172,10 +172,14 @@ html, body
 	position: absolute;
 	left: 0; top: 0;
 
+/*
 	background-image: url(../img/bg.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 100%;
+*/
+	
+	background: #F45866;
 	
 	outline: 1px solid #000;
 }
@@ -184,7 +188,7 @@ html, body
 {
 	position: absolute;
 
-	background: rgba(255, 0, 51, 0.5);
+/* 	background: rgba(255, 0, 51, 0.5); */
 }
 
 .blend

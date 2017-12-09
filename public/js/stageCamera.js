@@ -87,18 +87,19 @@ class Camera
 
 class Section
 {
-	constructor(main, w, h, x, y)
+	constructor(main, w, h, x, y, bg)
 	{
 		this.main = main;
 		this.w = w;
 		this.h = h;
 		this.x = x;
-		this.y = y;	
+		this.y = y;
+		this.bg = bg;	
 	}
 
 	placement()
 	{
-		this.main.setAttribute("style", "width: " + this.w + "px; height: " + this.h + "px; transform: translate(" + this.x + "px, " + this.y + "px);");
+		this.main.setAttribute("style", "width: " + this.w + "px; height: " + this.h + "px; transform: translate(" + this.x + "px, " + this.y + "px); background: " + this.bg + ";");
 	}
 }
 
@@ -107,6 +108,7 @@ var CAM;
 var displayList;
 var resizeTimeout;
 var sectionsARR;
+var sectionFocus;
 
 function pageLoad_init()
 {
@@ -131,6 +133,8 @@ function project_setup()
 	ui_init();
 	
 	dev_btns();
+	
+	section_request(0);
 }
 
 function section_init()
@@ -140,18 +144,32 @@ function section_init()
 	displayList.section0 = document.querySelector(".section0");
 	displayList.section1 = document.querySelector(".section1");
 	displayList.section2 = document.querySelector(".section2");
-
-	var s0 = new Section(displayList.section0, 320, 568, 1500, 400);
-	var s1 = new Section(displayList.section1, 180, 180, 200, 1000);
-	var s2 = new Section(displayList.section2, 200, 200, 400, 10);
+	displayList.section3 = document.querySelector(".section3");
+	
+	var s0 = new Section(displayList.section0, 100, 100, 40, 40, "#fff");
+	var s1 = new Section(displayList.section1, 320, 568, 1500, 400, "#F49390");
+	var s2 = new Section(displayList.section2, 180, 180, 200, 1000, "#C45AB3");
+	var s3 = new Section(displayList.section3, 200, 200, 400, 10, "#631A86");
 
 	s0.placement();
 	s1.placement();
 	s2.placement();
+	s3.placement();
 
 	sectionsARR.push(s0);
 	sectionsARR.push(s1);
 	sectionsARR.push(s2);
+	sectionsARR.push(s3);
+}
+
+function section_request(num)
+{
+	if(num != sectionFocus)
+	{
+		sectionFocus = num;
+		
+		CAM.viewerFind(sectionsARR[sectionFocus]);
+	}
 }
 
 
@@ -216,6 +234,8 @@ function ui_event(event)
 
 
 
+
+
 function resize_init(run)
 {
 	if(run)
@@ -248,7 +268,7 @@ function resize_apply()
 	trace("RESIZE");
 
 	CAM.updateResizeCamera();
-	CAM.viewerFind(sectionsARR[0]);
+	CAM.viewerFind(sectionsARR[sectionFocus]);
 }
 
 
