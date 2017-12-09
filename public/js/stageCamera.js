@@ -146,7 +146,7 @@ function section_init()
 	displayList.section2 = document.querySelector(".section2");
 	displayList.section3 = document.querySelector(".section3");
 	
-	var s0 = new Section(displayList.section0, 100, 100, 40, 40, "#fff");
+	var s0 = new Section(displayList.section0, 100, 100, 40, 40, "#333");
 	var s1 = new Section(displayList.section1, 320, 568, 1500, 400, "#F49390");
 	var s2 = new Section(displayList.section2, 180, 180, 200, 1000, "#C45AB3");
 	var s3 = new Section(displayList.section3, 200, 200, 400, 10, "#631A86");
