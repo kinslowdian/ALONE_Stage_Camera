@@ -1,4 +1,7 @@
-
+function dev_run()
+{
+	dev_btns();
+}
 
 
 function dev_btns()

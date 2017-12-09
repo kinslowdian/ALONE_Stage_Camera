@@ -31,17 +31,9 @@ class Camera
 	{
 		var vf = {};
 
-		// vf.cx = -((target.x));
-		// vf.cy = -((target.y));
-		// vf.cx_f = vf.cx + ((this.w * 0.5) - (target.w * 0.5));
-		// vf.cy_f = vf.cy + ((this.h * 0.5) - (target.h * 0.5));
-
 		vf.cx = -(target.x) + ((this.w * 0.5) - (target.w * 0.5));
 		vf.cy = -(target.y) + ((this.h * 0.5) - (target.h * 0.5));
 
-		trace(vf);
-
-		// this.viewerShift(vf.cx_f, vf.cy_f);
 		this.viewerShift(vf.cx, vf.cy);
 	}
 
@@ -54,14 +46,10 @@ class Camera
 		{
 			this.viewerTransition();
 		}
-
-		trace(this.viewerTransition);
 	}
 
 	viewerTransition()
 	{
-		trace("viewerTransition();");
-
 		this.viewer.addEventListener("transitionend", this.viewerTransitionEvent, false);
 
 		this.viewer.setAttribute("style", "transform: translate(" + this.viewer.x + "px, " + this.viewer.y + "px);");
@@ -71,8 +59,6 @@ class Camera
 	viewerTransitionEvent(event)
 	{
 		event.target.removeEventListener("transitionend", this.viewerTransitionEvent, false);
-		
-		trace(event);
 
 		// LINK BACK VALUES
 		camera_newFocus();
@@ -112,6 +98,8 @@ var sectionFocus;
 
 var ui;
 
+var devMode = false;
+
 function pageLoad_init()
 {
 	trace("pageLoad_init();");
@@ -131,10 +119,25 @@ function project_setup()
 
 	// LAST
 	resize_init(true);
-
+	
 	ui_init();
 	
-	dev_btns();
+	project_start();
+}
+
+function project_start()
+{
+	if(devMode)
+	{
+		dev_run();	
+	}
+	
+	else
+	{
+		var destroy = document.querySelector(".dev");
+		
+		destroy.classList.add("destroy");
+	}
 	
 	section_request(0);
 }
@@ -181,17 +184,6 @@ function camera_init()
 
 	CAM.updateResizeCamera();
 	CAM.connectViewer(displayList.viewer);
-
-	trace(CAM);
-
-	var delay = setTimeout(camera_test1, 1 * 1000);
-}
-
-function camera_test1()
-{
-	// CAM.viewerShift(-500, -500);
-
-	// CAM.viewerFind(sectionsARR[0]);
 }
 
 function camera_newFocus()
@@ -212,12 +204,10 @@ function ui_init()
 	
 	ui.list = new Array();
 	
-	
-	
-	ui.U.htmlAttach = document.querySelector(".ui .btn-u");
-	ui.D.htmlAttach = document.querySelector(".ui .btn-d");
-	ui.L.htmlAttach = document.querySelector(".ui .btn-l");
-	ui.R.htmlAttach = document.querySelector(".ui .btn-r");
+	ui.U.htmlAttach = document.querySelector(".ui .ui-u");
+	ui.D.htmlAttach = document.querySelector(".ui .ui-d");
+	ui.L.htmlAttach = document.querySelector(".ui .ui-l");
+	ui.R.htmlAttach = document.querySelector(".ui .ui-r");
 	
 	ui.list.push(ui.U);
 	ui.list.push(ui.D);
@@ -231,60 +221,28 @@ function ui_init()
 	}
 }
 
-function ui_run(run)
-{
-	if(run)
-	{
-		displayList.btnU.addEventListener("click", ui_event, false);
-		displayList.btnD.addEventListener("click", ui_event, false);
-		displayList.btnL.addEventListener("click", ui_event, false);
-		displayList.btnR.addEventListener("click", ui_event, false);
-	}
-	
-	else
-	{
-		displayList.btnU.removeEventListener("click", ui_event, false);
-		displayList.btnD.removeEventListener("click", ui_event, false);
-		displayList.btnL.removeEventListener("click", ui_event, false);
-		displayList.btnR.removeEventListener("click", ui_event, false);		
-	}
-}
-
 function ui_required()
 {
 	if(sectionFocus === 0)
 	{
-		ui.R.htmlAttach.classList.remove("btn-default");
-		ui.D.htmlAttach.classList.remove("btn-default");
-		
 		ui_activate(ui.R);
 		ui_activate(ui.D);
 	}
 	
 	else if(sectionFocus === 1)
 	{
-		ui.L.htmlAttach.classList.remove("btn-default");
-		ui.U.htmlAttach.classList.remove("btn-default");
-		
 		ui_activate(ui.L);
 		ui_activate(ui.U);		
 	}
 	
 	else if(sectionFocus === 2)
 	{
-		ui.R.htmlAttach.classList.remove("btn-default");
-		ui.U.htmlAttach.classList.remove("btn-default");
-		
 		ui_activate(ui.R);
 		ui_activate(ui.U);		
 	}
 	
 	else if(sectionFocus === 3)
 	{
-		ui.L.htmlAttach.classList.remove("btn-default");
-		ui.R.htmlAttach.classList.remove("btn-default");
-		ui.D.htmlAttach.classList.remove("btn-default");
-		
 		ui_activate(ui.L);
 		ui_activate(ui.R);
 		ui_activate(ui.D);		
@@ -360,27 +318,13 @@ function ui_path(direction)
 			break;
 		}
 	}
-	
-	
-	if(sectionFocus === 0)
-	{
-		if(direction === "R")
-		{
-			
-		}
-		
-		else if(direction === "D")
-		{
-			
-		}
-	}
 }
 
 function ui_activate(obj)
 {
 	obj.show = true;
 	obj.hasEvent = true;
-	
+	obj.htmlAttach.classList.remove("ui-default");
 	obj.htmlAttach.addEventListener("click", ui_event, false);
 }
 
@@ -391,7 +335,7 @@ function ui_reset()
 		if(ui.list[i].show)
 		{
 			ui.list[i].show = false;
-			ui.list[i].htmlAttach.classList.add("btn-default");	
+			ui.list[i].htmlAttach.classList.add("ui-default");	
 		}
 		
 		
@@ -414,11 +358,6 @@ function ui_event(event)
 	
 	ui_path(event.target.dataset.direction);
 }
-
-
-
-
-
 
 function resize_init(run)
 {
@@ -449,8 +388,6 @@ function resize_call()
 
 function resize_apply()
 {
-	trace("RESIZE");
-
 	CAM.updateResizeCamera();
 	CAM.viewerFind(sectionsARR[sectionFocus]);
 }
