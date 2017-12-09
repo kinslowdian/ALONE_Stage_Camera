@@ -216,23 +216,39 @@ html, body
 /* MOBILE */
 @media only screen and (min-width: 300px)
 {
-
+	.camera
+	{
+		width: 100%;
+		height: 100%;
+	}
 }
 
 /* PHABLET */
 @media only screen and (min-width: 600px)
 {
-	
+	.camera
+	{
+		width: 100%;
+		height: 100%;
+	}
 }
 
 /* TABLET */
 @media only screen and (min-width: 900px)
 {
-
+	.camera
+	{
+		width: 50%;
+		height: 50%;
+	}
 }
 
 /* DESKTOP */
 @media only screen and (min-width: 1200px)
 {
-
+	.camera
+	{
+		width: 50%;
+		height: 50%;
+	}
 }
