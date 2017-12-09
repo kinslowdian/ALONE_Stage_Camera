@@ -112,6 +112,8 @@ var sectionFocus;
 
 var directions;
 
+var ui;
+
 function pageLoad_init()
 {
 	trace("pageLoad_init();");
@@ -203,21 +205,30 @@ function camera_newFocus()
 
 function ui_init()
 {
-	displayList.btnU = document.querySelector(".ui .btn-u");
-	displayList.btnD = document.querySelector(".ui .btn-d");
-	displayList.btnL = document.querySelector(".ui .btn-l");
-	displayList.btnR = document.querySelector(".ui .btn-r");
+	ui = {};
 	
-	directions = new Array();
+	ui.U = {};
+	ui.D = {};
+	ui.L = {};
+	ui.R = {};
 	
-	directions.push(displayList.btnU);
-	directions.push(displayList.btnD);
-	directions.push(displayList.btnL);
-	directions.push(displayList.btnR);
+	ui.list = new Array();
 	
-	for(var i in directions)
+	
+	
+	ui.U.attach = document.querySelector(".ui .btn-u");
+	ui.D.attach = document.querySelector(".ui .btn-d");
+	ui.L.attach = document.querySelector(".ui .btn-l");
+	ui.R.attach = document.querySelector(".ui .btn-r");
+	
+	ui.list.push(ui.U);
+	ui.list.push(ui.D);
+	ui.list.push(ui.L);
+	ui.list.push(ui.R);
+	
+	for(var i in ui.list)
 	{
-		directions[i].hasEvent = false;
+		ui.list[i].hasEvent = false;
 	}
 	
 	// ui_run(true);
@@ -248,11 +259,11 @@ function ui_required()
 {
 	if(sectionFocus === 0)
 	{
-		displayList.btnR.classList.remove("btn-default");
-		displayList.btnD.classList.remove("btn-default");
+		ui.R.attach.classList.remove("btn-default");
+		ui.D.attach.classList.remove("btn-default");
 		
-		ui_activate(displayList.btnU);
-		ui_activate(displayList.btnL);
+		ui_activate(ui.R);
+		ui_activate(ui.D);
 	}
 	
 	else if(sectionFocus === 1)
@@ -271,26 +282,26 @@ function ui_required()
 	}
 }
 
-function ui_activate(btn)
+function ui_activate(obj)
 {
-	btn.allow = true;
-	btn.hasEvent = true;
+	obj.allow = true;
+	obj.hasEvent = true;
 	
-	btn.addEventListener("click", ui_event, false);
+	obj.attach.addEventListener("click", ui_event, false);
 	
-	trace(btn);
+	trace(ui);
 }
 
 function ui_reset()
 {
-	for(var i in directions)
+	for(var i in ui.list)
 	{
-		directions[i].allow = false;
-		directions[i].classList.add("btn-default");
+		ui.list[i].allow = false;
+		ui.list[i].attach.classList.add("btn-default");
 		
-		if(directions[i].hasEvent)
+		if(ui.list[i].hasEvent)
 		{
-			directions[i].removeEventListener("click", ui_event, false);
+			ui.list[i].attach.removeEventListener("click", ui_event, false);
 		}
 	}	
 }
