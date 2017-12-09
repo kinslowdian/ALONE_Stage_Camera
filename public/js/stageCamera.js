@@ -197,6 +197,8 @@ function camera_test1()
 function camera_newFocus()
 {
 	CAM.viewerUpdateValues();
+	
+	ui_required();
 }
 
 function ui_init()
@@ -240,6 +242,43 @@ function ui_run(run)
 		displayList.btnL.removeEventListener("click", ui_event, false);
 		displayList.btnR.removeEventListener("click", ui_event, false);		
 	}
+}
+
+function ui_required()
+{
+	if(sectionFocus === 0)
+	{
+		displayList.btnR.classList.remove("btn-default");
+		displayList.btnD.classList.remove("btn-default");
+		
+		ui_activate(displayList.btnU);
+		ui_activate(displayList.btnL);
+	}
+	
+	else if(sectionFocus === 1)
+	{
+		
+	}
+	
+	else if(sectionFocus === 2)
+	{
+		
+	}
+	
+	else if(sectionFocus === 3)
+	{
+		
+	}
+}
+
+function ui_activate(btn)
+{
+	btn.allow = true;
+	btn.hasEvent = true;
+	
+	btn.addEventListener("click", ui_event, false);
+	
+	trace(btn);
 }
 
 function ui_reset()
