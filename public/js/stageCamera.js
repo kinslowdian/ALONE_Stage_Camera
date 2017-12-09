@@ -110,8 +110,6 @@ var resizeTimeout;
 var sectionsARR;
 var sectionFocus;
 
-var directions;
-
 var ui;
 
 function pageLoad_init()
@@ -216,10 +214,10 @@ function ui_init()
 	
 	
 	
-	ui.U.attach = document.querySelector(".ui .btn-u");
-	ui.D.attach = document.querySelector(".ui .btn-d");
-	ui.L.attach = document.querySelector(".ui .btn-l");
-	ui.R.attach = document.querySelector(".ui .btn-r");
+	ui.U.htmlAttach = document.querySelector(".ui .btn-u");
+	ui.D.htmlAttach = document.querySelector(".ui .btn-d");
+	ui.L.htmlAttach = document.querySelector(".ui .btn-l");
+	ui.R.htmlAttach = document.querySelector(".ui .btn-r");
 	
 	ui.list.push(ui.U);
 	ui.list.push(ui.D);
@@ -228,12 +226,9 @@ function ui_init()
 	
 	for(var i in ui.list)
 	{
+		ui.list[i].show = false;
 		ui.list[i].hasEvent = false;
 	}
-	
-	// ui_run(true);
-	
-	ui_reset();
 }
 
 function ui_run(run)
@@ -259,8 +254,8 @@ function ui_required()
 {
 	if(sectionFocus === 0)
 	{
-		ui.R.attach.classList.remove("btn-default");
-		ui.D.attach.classList.remove("btn-default");
+		ui.R.htmlAttach.classList.remove("btn-default");
+		ui.D.htmlAttach.classList.remove("btn-default");
 		
 		ui_activate(ui.R);
 		ui_activate(ui.D);
@@ -268,47 +263,156 @@ function ui_required()
 	
 	else if(sectionFocus === 1)
 	{
+		ui.L.htmlAttach.classList.remove("btn-default");
+		ui.U.htmlAttach.classList.remove("btn-default");
 		
+		ui_activate(ui.L);
+		ui_activate(ui.U);		
 	}
 	
 	else if(sectionFocus === 2)
 	{
+		ui.R.htmlAttach.classList.remove("btn-default");
+		ui.U.htmlAttach.classList.remove("btn-default");
 		
+		ui_activate(ui.R);
+		ui_activate(ui.U);		
 	}
 	
 	else if(sectionFocus === 3)
 	{
+		ui.L.htmlAttach.classList.remove("btn-default");
+		ui.R.htmlAttach.classList.remove("btn-default");
+		ui.D.htmlAttach.classList.remove("btn-default");
 		
+		ui_activate(ui.L);
+		ui_activate(ui.R);
+		ui_activate(ui.D);		
+	}
+}
+
+function ui_path(direction)
+{
+	switch(sectionFocus)
+	{
+		case 0:
+		{
+			if(direction === "R")
+			{
+				section_request(3);
+			}
+			
+			else if(direction === "D")
+			{
+				section_request(2);
+			}
+			
+			break;
+		}
+		
+		case 1:
+		{
+			if(direction === "U")
+			{
+				section_request(3);
+			}
+			
+			else if(direction === "L")
+			{
+				section_request(2);
+			}
+			
+			break;
+		}
+		
+		case 2:
+		{
+			if(direction === "U")
+			{
+				section_request(3);
+			}
+			
+			else if(direction === "R")
+			{
+				section_request(1);
+			}
+			
+			break;
+		}
+		
+		case 3:
+		{
+			if(direction === "L")
+			{
+				section_request(0);
+			}
+			
+			else if(direction === "R")
+			{
+				section_request(1);
+			}
+			
+			else if(direction === "D")
+			{
+				section_request(2);
+			}
+			
+			break;
+		}
+	}
+	
+	
+	if(sectionFocus === 0)
+	{
+		if(direction === "R")
+		{
+			
+		}
+		
+		else if(direction === "D")
+		{
+			
+		}
 	}
 }
 
 function ui_activate(obj)
 {
-	obj.allow = true;
+	obj.show = true;
 	obj.hasEvent = true;
 	
-	obj.attach.addEventListener("click", ui_event, false);
-	
-	trace(ui);
+	obj.htmlAttach.addEventListener("click", ui_event, false);
 }
 
 function ui_reset()
 {
 	for(var i in ui.list)
 	{
-		ui.list[i].allow = false;
-		ui.list[i].attach.classList.add("btn-default");
+		if(ui.list[i].show)
+		{
+			ui.list[i].show = false;
+			ui.list[i].htmlAttach.classList.add("btn-default");	
+		}
+		
 		
 		if(ui.list[i].hasEvent)
 		{
-			ui.list[i].attach.removeEventListener("click", ui_event, false);
+			ui.list[i].htmlAttach.removeEventListener("click", ui_event, false);
 		}
 	}	
 }
 
 function ui_event(event)
 {
-	trace(event.target.dataset.direction);
+	var direction; 
+	
+	event.preventDefault();
+	
+	ui_reset();
+	
+	direction = event.target.dataset.direction;
+	
+	ui_path(event.target.dataset.direction);
 }
 
 

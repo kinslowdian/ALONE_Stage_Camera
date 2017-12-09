@@ -147,6 +147,7 @@ html, body
 .btn-default
 {
 	opacity: 0;
+	cursor: default !important;
 }
 
 .ui li
